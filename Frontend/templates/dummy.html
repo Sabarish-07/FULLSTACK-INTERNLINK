@@ -1,0 +1,481 @@
+<html lang="en"><head>
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internlink</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">    
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <h1>INTERNLINK</h1>
+        <div class="navlinks">
+            <p class="navlink"><a href="/Internlink/">Home</a></p>
+            <p class="navlink"><a href="/Internlink/search">Search</a></p>
+            
+            <p class="navlink"><a href="/Internlink/add">Add Intern</a></p>
+            <p class="navlink"><a href="/Internlink/adduser">Add User</a></p>
+            
+            <p class="navlink"><a href="/logout/">Log Out</a></p>
+        </div>
+        <div class="navbartoggle" onclick="shownav()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+
+    <div class="sidenavbar">
+        <p class="xmark" onclick="closenav()"><i class="fa-solid fa-xmark"></i></p>
+        <p class="sidenavlink"><a href="/Internlink/">Home</a></p>
+        <p class="sidenavlink"><a href="/Internlink/search">Search</a></p>
+        
+        <p class="sidenavlink"><a href="/Internlink/add">Add Intern</a></p>
+        <p class="sidenavlink"><a href="/Internlink/adduser">Add User</a></p>
+        
+        <p class="sidenavlink"><a href="/logout/">Log Out</a></p>
+    </div>
+    
+    
+   
+    <div class="addintern">
+        <h1>Add Intern</h1>
+        <form method="post" action="/Internlink/add" enctype="multipart/form-data">
+            <input type="hidden" name="csrfmiddlewaretoken" value="tXxuw5lJucLpsauBEbsYqMfwLsoDBM6p2GxqfLHdyR06L6fgX1k11NUdynYGiSh6">
+            <p>
+    <label for="id_photo">Photo:</label>
+    <input type="file" name="photo" accept="image/*" required="" id="id_photo">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_first_name">First name:</label>
+    <input type="text" name="first_name" maxlength="50" required="" id="id_first_name">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_middle_name">Middle name:</label>
+    <input type="text" name="middle_name" maxlength="50" id="id_middle_name">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_last_name">Last name:</label>
+    <input type="text" name="last_name" maxlength="50" required="" id="id_last_name">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_intern_id">Intern id:</label>
+    <input type="text" name="intern_id" maxlength="50" required="" id="id_intern_id">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_team">Team:</label>
+    <select name="team" required="" id="id_team">
+  <option value="" selected="">---------</option>
+
+  <option value="Rewards Team">Rewards Team</option>
+
+  <option value="Skill Team">Skill Team</option>
+
+  <option value="Academics">Academics</option>
+
+  <option value="T&amp;P">T&amp;P</option>
+
+  <option value="R&amp;D">R&amp;D</option>
+
+  <option value="PIC">PIC</option>
+
+</select>
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_mobile_number">Mobile number:</label>
+    <input type="text" name="mobile_number" maxlength="15" required="" id="id_mobile_number">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_alt_mobile_number">Alt mobile number:</label>
+    <input type="text" name="alt_mobile_number" maxlength="15" id="id_alt_mobile_number">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_personal_email">Personal email:</label>
+    <input type="email" name="personal_email" maxlength="100" required="" id="id_personal_email">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_institution_email">Institution email:</label>
+    <input type="email" name="institution_email" maxlength="100" required="" id="id_institution_email">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_reporting_head">Reporting head:</label>
+    <input type="text" name="reporting_head" maxlength="50" required="" id="id_reporting_head">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_stipend">Stipend:</label>
+    <input type="number" name="stipend" step="0.01" required="" id="id_stipend">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_working_duration">Working duration:</label>
+    <input type="number" name="working_duration" required="" id="id_working_duration">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_interview_date">Interview date:</label>
+    <input type="text" name="interview_date" required="" id="id_interview_date">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_joining_date">Joining date:</label>
+    <input type="text" name="joining_date" required="" id="id_joining_date">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_selection_status">Selection status:</label>
+    <select name="selection_status" required="" id="id_selection_status">
+  <option value="" selected="">---------</option>
+
+  <option value="Selected">Selected</option>
+
+  <option value="Waiting List">Waiting List</option>
+
+</select>
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_working_status">Working status:</label>
+    <select name="working_status" required="" id="id_working_status">
+  <option value="" selected="">---------</option>
+
+  <option value="Active">Active</option>
+
+  <option value="Inactive">Inactive</option>
+
+</select>
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_dob">Dob:</label>
+    <input type="text" name="dob" required="" id="id_dob">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_gender">Gender:</label>
+    <select name="gender" required="" id="id_gender">
+  <option value="" selected="">---------</option>
+
+  <option value="Male">Male</option>
+
+  <option value="Female">Female</option>
+
+  <option value="Other">Other</option>
+
+</select>
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_nationality">Nationality:</label>
+    <input type="text" name="nationality" maxlength="50" required="" id="id_nationality">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_age">Age:</label>
+    <input type="number" name="age" required="" id="id_age">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_father_name">Father name:</label>
+    <input type="text" name="father_name" maxlength="50" required="" id="id_father_name">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_mother_name">Mother name:</label>
+    <input type="text" name="mother_name" maxlength="50" required="" id="id_mother_name">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_father_occupation">Father occupation:</label>
+    <input type="text" name="father_occupation" maxlength="50" required="" id="id_father_occupation">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_mother_occupation">Mother occupation:</label>
+    <input type="text" name="mother_occupation" maxlength="50" required="" id="id_mother_occupation">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_blood_group">Blood group:</label>
+    <input type="text" name="blood_group" maxlength="3" required="" id="id_blood_group">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_current_address">Current address:</label>
+    <textarea name="current_address" cols="40" rows="10" required="" id="id_current_address"></textarea>
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_permanent_address">Permanent address:</label>
+    <textarea name="permanent_address" cols="40" rows="10" required="" id="id_permanent_address"></textarea>
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_school_10th_name">School 10th name:</label>
+    <input type="text" name="school_10th_name" maxlength="100" required="" id="id_school_10th_name">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_percentage_10th">Percentage 10th:</label>
+    <input type="number" name="percentage_10th" step="0.01" required="" id="id_percentage_10th">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_year_of_passing_10th">Year of passing 10th:</label>
+    <input type="number" name="year_of_passing_10th" required="" id="id_year_of_passing_10th">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_school_12th_name">School 12th name:</label>
+    <input type="text" name="school_12th_name" maxlength="100" required="" id="id_school_12th_name">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_percentage_12th">Percentage 12th:</label>
+    <input type="number" name="percentage_12th" step="0.01" required="" id="id_percentage_12th">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_year_of_passing_12th">Year of passing 12th:</label>
+    <input type="number" name="year_of_passing_12th" required="" id="id_year_of_passing_12th">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_ug_college_name">Ug college name:</label>
+    <input type="text" name="ug_college_name" maxlength="100" required="" id="id_ug_college_name">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_ug_course">Ug course:</label>
+    <input type="text" name="ug_course" maxlength="50" required="" id="id_ug_course">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_ug_degree">Ug degree:</label>
+    <input type="text" name="ug_degree" maxlength="50" required="" id="id_ug_degree">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_ug_cgpa">Ug cgpa:</label>
+    <input type="number" name="ug_cgpa" step="0.01" required="" id="id_ug_cgpa">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_ug_year_of_passing">Ug year of passing:</label>
+    <input type="number" name="ug_year_of_passing" required="" id="id_ug_year_of_passing">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_pg_college_name">Pg college name:</label>
+    <input type="text" name="pg_college_name" maxlength="100" id="id_pg_college_name">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_pg_course">Pg course:</label>
+    <input type="text" name="pg_course" maxlength="50" id="id_pg_course">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_pg_degree">Pg degree:</label>
+    <input type="text" name="pg_degree" maxlength="50" id="id_pg_degree">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_pg_cgpa">Pg cgpa:</label>
+    <input type="number" name="pg_cgpa" step="0.01" id="id_pg_cgpa">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_pg_year_of_passing">Pg year of passing:</label>
+    <input type="number" name="pg_year_of_passing" id="id_pg_year_of_passing">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_previous_company">Previous company:</label>
+    <input type="text" name="previous_company" maxlength="100" id="id_previous_company">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_job_title">Job title:</label>
+    <input type="text" name="job_title" maxlength="50" id="id_job_title">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_years_of_experience">Years of experience:</label>
+    <input type="number" name="years_of_experience" id="id_years_of_experience">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_resume_upload">Resume upload:</label>
+    <input type="file" name="resume_upload" required="" id="id_resume_upload">
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_linkedin">Linkedin:</label>
+    <input type="url" name="linkedin" maxlength="200" id="id_linkedin">
+    
+    
+      
+    
+  </p>
+            <button type="submit">Submit</button>
+        </form>
+    </div>

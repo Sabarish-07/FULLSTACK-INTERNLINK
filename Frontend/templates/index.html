@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internlink</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class="navbar">
+        <h1>INTERNLINK</h1>
+        <div class="navlinks">
+            <p class="navlink"><a href="{% url 'home' %}">Home</a></p>
+            <p class="navlink"><a href="{% url 'search' %}">Search</a></p>
+            {%if request.user.is_superuser == 1%}
+            <p class="navlink"><a href="{% url 'add' %}">Add Intern</a></p>
+            <p class="navlink"><a href="{% url 'adduser' %}">Add User</a></p>
+            {% endif %}
+            <p class="navlink"><a href="{% url 'logout' %}">Log Out</a></p>
+        </div>
+        <div class="navbartoggle" onclick="shownav()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+
+    <div class="sidenavbar">
+        <p class="xmark" onclick="closenav()"><i class="fa-solid fa-xmark"></i></p>
+        <p class="sidenavlink"><a href="{% url 'home' %}">Home</a></p>
+        <p class="sidenavlink"><a href="{% url 'search' %}">Search</a></p>
+        {%if request.user.is_superuser == 1%}
+        <p class="sidenavlink"><a href="{% url 'add' %}">Add Intern</a></p>
+        <p class="sidenavlink"><a href="{% url 'adduser' %}">Add User</a></p>
+        {%endif%}
+        <p class="sidenavlink"><a href="{% url 'logout' %}">Log Out</a></p>
+    </div>
+
+    <div class="welcome">
+        <div class="welcometext">
+            <h2>WELCOME TO INTERNLINK</h2>
+            <h3>-Your Intern Data Management System</h3>
+            <p>Your go-to solution for managing and organizing intern data efficiently. Track intern data, monitor team
+                distributions, and stay updated —all in one place. INTERNLINK provides a seamless experience to ensure
+                your intern management is always on point</p>
+        </div>
+        <div class="welcomeimage">
+            <img src="{% static 'images/bannariamman.jpg' %}" alt="Bannari Amman Institute of Technology">
+        </div>
+    </div>
+
+
+    <h2 class="keymetrics">KEY METRICS:</h2>
+    <div class="metricscontainer">
+        
+        <div class="metricsbox">
+            <i class="fa-solid fa-user"></i>
+            <p><b>Total No. Of Active Interns:</b></p>
+            <p><b>{{total_interns}}</b></p>
+            
+        </div>
+
+        <div class="metricsbox">
+            <i class="fa-solid fa-venus-mars"></i>
+            <p><b>No. Of Male Interns: {{male_interns}}</b></p>
+            <p><b>No. Of Female Interns:{{female_interns}}</b> </p>
+            
+        </div>
+
+    
+    </div>
+    <h2 class="chartheading">TEAM-WISE INTERN ALLOCATION:</h2>    
+    <div class="charts">
+
+
+        <div class="doughnutchart">
+            <h2>TEAMS</h2>
+            <canvas id="doughnut"></canvas>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>© 2024 INTERNLINK. All rights reserved.</p>
+        <p>INTERNLINK is a comprehensive platform for managing and organizing intern data efficiently.</p>
+        <p><b>Quick Links:</b></p>
+        <a>Privacy Policy</a>
+        <a>Terms of Service</a>
+        <a>Contact Us</a>
+        <a>Feedback</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById('doughnut');
+            if (ctx) {
+                const chartData = {
+                    labels: {{ chart_data.labels|safe }},
+                    datasets: [{
+                        label: 'No. of Interns',
+                        data: {{ chart_data.data|safe }},
+                        borderWidth: 1,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)'
+                        ]
+                    }]
+                };
+    
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                    }
+                });
+            }
+        });
+    </script>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>

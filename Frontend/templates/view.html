@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internlink</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class="navbar">
+        <h1>INTERNLINK</h1>
+        <div class="navlinks">
+            <p class="navlink"><a href="{% url 'home' %}">Home</a></p>
+            <p class="navlink"><a href="{% url 'search' %}">Search</a></p>
+            {% if request.user.is_superuser %}
+            <p class="navlink"><a href="{% url 'add' %}">Add Intern</a></p>
+            <p class="navlink"><a href="{% url 'adduser' %}">Add User</a></p>
+            {% endif %}
+            <p class="navlink"><a href="{% url 'logout' %}">Log Out</a></p>
+        </div>
+        <div class="navbartoggle" onclick="shownav()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+
+    <div class="sidenavbar">
+        <p class="xmark" onclick="closenav()"><i class="fa-solid fa-xmark"></i></p>
+        <p class="sidenavlink"><a href="{% url 'home' %}">Home</a></p>
+        <p class="sidenavlink"><a href="{% url 'search' %}">Search</a></p>
+        {% if request.user.is_superuser %}
+        <p class="sidenavlink"><a href="{% url 'add' %}">Add Intern</a></p>
+        <p class="sidenavlink"><a href="{% url 'adduser' %}">Add User</a></p>
+        {% endif %}
+        <p class="sidenavlink"><a href="{% url 'logout' %}">Log Out</a></p>
+    </div>
+
+    <div class="viewintern">
+        <h2>Intern Details</h2>
+        <div class="intern-details">
+            <fieldset>
+                <legend>General Details</legend>
+                <div class="detail-row">
+                    <div class="detail-photo">
+                        <label for="photo">Photo:</label>
+                        <img id="photo" src="{{ intern.photo.url }}" alt="Intern Photo" class="photo-view">
+                    </div>
+                    <div class="detail-item">
+                        <label for="firstName">First Name:</label>
+                        <p id="firstName">{{ intern.first_name }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="middleName">Middle Name:</label>
+                        <p id="middleName">{{ intern.middle_name }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="lastName">Last Name:</label>
+                        <p id="lastName">{{ intern.last_name }}</p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="internId">Intern ID:</label>
+                        <p id="internId">{{ intern.intern_id }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="team">Team:</label>
+                        <p id="team">{{ intern.team }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="mobileNumber">Mobile Number:</label>
+                        <p id="mobileNumber">{{ intern.mobile_number }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="alternateMobileNumber">Alternate Mobile Number:</label>
+                        <p id="alternateMobileNumber">{{ intern.alt_mobile_number }}</p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="personalMail">Personal Mail ID:</label>
+                        <p id="personalMail">{{ intern.personal_email }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="institutionMail">Institution Mail ID:</label>
+                        <p id="institutionMail">{{ intern.institution_email }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="reportingHead">Reporting Head:</label>
+                        <p id="reportingHead">{{ intern.reporting_head }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="stipend">Stipend:</label>
+                        <p id="stipend">₹{{ intern.stipend }}</p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Interview Details</legend>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="interview-date">Date of Interview:</label>
+                        <p>{{ intern.interview_date }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="joining-date">Date of Joining:</label>
+                        <p>{{ intern.joining_date }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="selection-status">Selection Status:</label>
+                        <p>{{ intern.selection_status }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="working-status">Working Status:</label>
+                        <p>{{ intern.working_status }}</p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Personal Details</legend>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="fatherName">Father's Name:</label>
+                        <p id="fatherName">{{ intern.father_name }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="motherName">Mother's Name:</label>
+                        <p id="motherName">{{ intern.mother_name }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="fatherOccupation">Father's Occupation:</label>
+                        <p id="fatherOccupation">{{ intern.father_occupation }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="motherOccupation">Mother's Occupation:</label>
+                        <p id="motherOccupation">{{ intern.mother_occupation }}</p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="gender">Gender:</label>
+                        <p id="gender">{{ intern.gender }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="dob">Date of Birth:</label>
+                        <p id="dob">{{ intern.dob }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="age">Age:</label>
+                        <p id="age">{{ intern.age }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="bloodGroup">Blood Group:</label>
+                        <p id="bloodGroup">{{ intern.blood_group }}</p>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="currentAddress">Current Address:</label>
+                        <p id="currentAddress">{{ intern.current_address }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="permanentAddress">Permanent Address:</label>
+                        <p id="permanentAddress">{{ intern.permanent_address }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="linkedinProfile">LinkedIn Profile:</label>
+                        <p id="linkedinProfile"><a href="{{ intern.linkedin }}" target="_blank">View Profile</a></p>
+                    </div>
+                    
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>School Details</legend>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="school_10th_name">School Name:(10th Grade):</label>
+                        <p id="school_10th_name">{{ intern.school_10th_name }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="percentage_10th">10th Grade Percentage:</label>
+                        <p id="percentage_10th">{{ intern.percentage_10th }}%</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="year_of_passing_10th">Year of Passing (10th Grade):</label>
+                        <p id="year_of_passing_10th">{{ intern.year_of_passing_10th }}</p>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="school_12th_name">School Name:(12th Grade):</label>
+                        <p id="school_12th_name">{{ intern.school_12th_name }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="percentage_12th">12th Grade Percentage:</label>
+                        <p id="percentage_12th">{{ intern.percentage_12th }}%</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="year_of_passing_12th">Year of Passing (12th Grade):</label>
+                        <p id="year_of_passing_12th">{{ intern.year_of_passing_12th }}</p>
+                    </div>
+                </div>
+                
+                    
+            </fieldset>
+
+            <fieldset>
+                <legend>Undergraduate Details</legend>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="ug_college_name">UG College Name:</label>
+                        <p id="ug_college_name">{{ intern.ug_college_name }}</p>
+                    </div>
+           
+                    <div class="detail-item">
+                        <label for="ugCourse">UG Course:</label>
+                        <p id="ugCourse">{{ intern.ug_course }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="ug_degree">UG Degree:</label>
+                        <p id="ug_degree">{{ intern.ug_degree }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="ugCgpa">UG CGPA:</label>
+                        <p id="ugCgpa">{{ intern.ug_cgpa }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="ugYearPassing">UG Year of Passing:</label>
+                        <p id="ugYearPassing">{{ intern.ug_year_of_passing }}</p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Postgraduate Details (Optional)</legend>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="pgCollegeName">PG College Name:</label>
+                        <p id="pgCollegeName">{{ intern.pg_college_name }}</p>
+                    </div>
+              
+                    <div class="detail-item">
+                        <label for="pgCourse">PG Course:</label>
+                        <p id="pgCourse">{{ intern.pg_course }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="pgDegree">PG Degree:</label>
+                        <p id="pgDegree">{{ intern.pg_degree }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="pgCgpa">PG CGPA:</label>
+                        <p id="pgCgpa">{{ intern.pg_cgpa }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="pgYearPassing">PG Year of Passing:</label>
+                        <p id="pgYearPassing">{{ intern.pg_year_of_passing }}</p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Work Experience (if any)</legend>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="previous_company">Company:</label>
+                        <p id="previous_company">{{ intern.previous_company }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="job_title">Job Title:</label>
+                        <p id="job_title">{{ intern.job_title }}</p>
+                    </div>
+                    <div class="detail-item">
+                        <label for="years_of_experience">Experience(Years):</label>
+                        <p id="years_of_experience">{{ intern.years_of_experience }}</p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Resume </legend>
+                <div class="detail-row">
+                    <div class="detail-item">
+                        <label for="resume">Resume:</label>
+                        <p id="resume"><a href="{{ intern.resume_upload.url }}" target="_blank">Download Resume</a></p>
+                    </div>
+                </div>
+            </fieldset>
+            
+      
+            {%if request.user.is_superuser == 1%}
+                <div class="buttons" style="display:flex; justify-content:space-between">
+                    
+                    <div class="editbutton">
+                        <a href="{% url 'editintern' intern_id=intern.intern_id %}">
+                        <button>Edit</button>
+                        </a>
+                    </div>
+                    
+                
+            
+                    
+                    <div class="editbutton">
+                        <a href="{% url 'deleteintern' intern_id=intern.intern_id %}">
+                        <button>Delete</button>
+                        </a>
+                    </div>
+                    
+                </div>
+            {% endif %}
+        </div>
+        
+    </div>
+    
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
